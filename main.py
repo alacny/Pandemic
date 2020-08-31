@@ -7,7 +7,7 @@ import species as h
 import world as w
 
 # Initial number of persons
-maxP=10000
+maxP=100
 # Range of infection
 rInf=10
 

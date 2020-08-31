@@ -1,5 +1,14 @@
 import random as r
+
+############################################
+# author: Adam Łacny (alacny51@gmail.com)
+#
+# Class Species
+# 
+############################################
 class Species:
+
+    # Constructor
     def __init__(self):
         # illness=0 <=> sound
         # illness=maxIll <=> dead <=> alive = False
@@ -9,24 +18,17 @@ class Species:
         self.immune = False
         self.alive = True
 
-        self.maxIll = 100
-        self.maxX = 6000
-        self.maxY = 6000
+        self.maxIll = 100 # Maximum of illness value (100 sets alive = False)
+
+        # The size of the world. To be changed to something better
+        self.maxX = 600 
+        self.maxY = 600
+
+        # Initial coordinates
         self.x=round(self.maxX*r.random())
         self.y=round(self.maxY*r.random())
 
-    def setImmune(self):
-        self.immune=True
-    def raiseInfection(self, amount):
-        if self.immune and self.alive:
-            self.illness = 0
-            return()
-
-        self.illness = self.illness+amount
-        if self.illness >=100:
-            self.illness = 100
-            self.alive = False
-
+# Getters
     def getIllness(self):
         return (self.illness)
 
@@ -36,11 +38,18 @@ class Species:
     def getY(self):
         return self.y
 
+# Setters
+
+    def setImmune(self):
+        self.immune=True
+
     def setX(self,x):
         self.x=x
 
     def setY(self,y):
         self.y=y
+
+# Run time operators
 
     def goToXY(self,x,y):
         self.x=x
@@ -63,3 +72,20 @@ class Species:
             self.y = self.y - self.dy
         else:
             self.y=self.ny
+
+    # Method:
+    #   raiseInfection()
+    # can be used to start infection with probability 1 
+    # one can also use method 
+    #   startInfection()
+    # to infect the species with probability
+
+    def raiseInfection(self, amount):
+        if self.immune and self.alive:
+            self.illness = 0
+            return()
+
+        self.illness = self.illness+amount
+        if self.illness >=100:
+            self.illness = 100
+            self.alive = False
