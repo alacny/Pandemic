@@ -2,18 +2,30 @@ import random as r
 class Species:
     def __init__(self):
         # illness=0 <=> sound
-        # illness=100 <=> dead
+        # illness=maxIll <=> dead <=> alive = False
         self.illness = 0 
+
+        # if immune = False, the one can be infected
+        self.immune = False
+        self.alive = True
+
         self.maxIll = 100
         self.maxX = 6000
         self.maxY = 6000
         self.x=round(self.maxX*r.random())
         self.y=round(self.maxY*r.random())
 
+    def setImmune(self):
+        self.immune=True
     def raiseInfection(self, amount):
+        if self.immune and self.alive:
+            self.illness = 0
+            return()
+
         self.illness = self.illness+amount
         if self.illness >=100:
             self.illness = 100
+            self.alive = False
 
     def getIllness(self):
         return (self.illness)
