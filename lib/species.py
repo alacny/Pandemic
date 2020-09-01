@@ -28,6 +28,11 @@ class Species:
         self.x=round(self.maxX*r.random())
         self.y=round(self.maxY*r.random())
 
+        # Probability of getting infected when when met other infected person
+        # values 0 (probability=0) to 100 (probability=1).
+
+        pOfInf = 100
+
 # Getters
     def getIllness(self):
         return (self.illness)
@@ -48,6 +53,23 @@ class Species:
 
     def setY(self,y):
         self.y=y
+
+#    
+#    method setInfection()
+#    This method starts infection with predefined probability pOfInf
+    def setInfection(self):
+        if (r.randint(0,100) <= self.pOfInf) and (not self.immune):
+            self.illness=1
+        
+   
+#
+#    Method setPOfInf()
+#    Defines probability of being infected when encountering another
+#    infected species
+
+    def setPOfInf(self, pOfInf):
+        self.pOfInf=pOfInf
+    
 
 # Run time operators
 
@@ -77,7 +99,7 @@ class Species:
     #   raiseInfection()
     # can be used to start infection with probability 1 
     # one can also use method 
-    #   startInfection()
+    #   setInfection()
     # to infect the species with probability
 
     def raiseInfection(self, amount):
